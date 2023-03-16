@@ -3,5 +3,5 @@ import instance from "./index";
 
 export default async function getProducts() {
   const products = await instance.get<IProduct[]>("/products");
-  return products.data;
+  return products.data.map((p) => ({ ...p, amount: 1 }));
 }

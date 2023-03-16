@@ -3,13 +3,20 @@ import useProduct from "@/store/useProduct";
 import { useMemo } from "react";
 
 export default function Header() {
-  const { productsCard } = useProduct();
-  const totalProducts = productsCard.length;
+  const { productsCart: productsCard } = useProduct();
+
+  const mountTotal = useMemo(
+    () =>
+      productsCard.reduce((acc: number, { amount }: { amount: number }) => {
+        return acc + amount;
+      }, 0),
+    [productsCard]
+  );
 
   const pricesTotal = useMemo(
     () =>
-      productsCard.reduce((acc: number, { price }) => {
-        return acc + price;
+      productsCard.reduce((acc: number, { price, amount }) => {
+        return acc + price * amount;
       }, 0),
     [productsCard]
   );
@@ -18,7 +25,7 @@ export default function Header() {
     <div className="navbar bg-base-100 shadow-md">
       <div className="flex-1">
         <Link href="/" className="btn btn-ghost normal-case text-xl">
-          daisyUI
+          StoreChic
         </Link>
       </div>
       <div className="flex-none">
@@ -40,7 +47,7 @@ export default function Header() {
                 />
               </svg>
               <span className="badge badge-sm indicator-item">
-                {totalProducts}
+                {mountTotal}
               </span>
             </div>
           </label>
@@ -50,8 +57,10 @@ export default function Header() {
             className="mt-3 card card-compact dropdown-content w-52 bg-base-100 shadow"
           >
             <div className="card-body">
-              <span className="font-bold text-lg">{totalProducts} Items</span>
-              <span className="text-info">Subtotal: $ {pricesTotal} </span>
+              <span className="font-bold text-lg">{mountTotal} Items</span>
+              <p className="text-info">
+                Subtotal: <span className="text-neutral"> $ {pricesTotal}</span>{" "}
+              </p>
               <div className="card-actions">
                 <Link
                   href="/shoppingCart"

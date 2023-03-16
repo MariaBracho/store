@@ -1,15 +1,17 @@
+import { useCallback, useMemo, useState } from "react";
+import { useRouter } from "next/router";
+
 import Card from "../Card";
 import Spin from "../shared/Spin";
 import SearchProduct from "../SearchProduct";
-import { useCallback, useMemo, useState } from "react";
+
 import { type IProduct } from "@/share/interfaces/products";
-import { useRouter } from "next/router";
 
 interface IProductList {
   data: IProduct[];
   isLoading: boolean;
   onClick: (product: IProduct) => void;
-  isProductInCart: (id: string | undefined) => boolean;
+  isProductInCart: (id: IProduct["id"]) => boolean;
 }
 
 export default function ProductList({
@@ -55,23 +57,38 @@ export default function ProductList({
       ) : (
         <>
           <SearchProduct onChange={filterProduct} />
-          <div className="min-h-screen my-10 flex flex-wrap gap-10 justify-center">
-            {products.map((product) => {
-              const { title, description, price, image, category, id } =
-                product;
-              return (
-                <Card
-                  key={id}
-                  isShoppingCard={isShoppingCard}
-                  onClick={handleClickProduct(product)}
-                  title={title}
-                  description={description}
-                  price={price}
-                  category={category}
-                  image={image}
-                />
-              );
-            })}
+          <div className="min-h-screen w-full max-w-[1400px] my-10 flex flex-wrap gap-10 justify-center">
+            {products.length !== 0 ? (
+              products.map((product) => {
+                const {
+                  title,
+                  amount,
+                  description,
+                  price,
+                  image,
+                  category,
+                  id,
+                } = product;
+                return (
+                  <Card
+                    key={id}
+                    id={id}
+                    amount={amount}
+                    isShoppingCard={isShoppingCard}
+                    onClick={handleClickProduct(product)}
+                    title={title}
+                    description={description}
+                    price={price}
+                    category={category}
+                    image={image}
+                  />
+                );
+              })
+            ) : (
+              <p className="mt-28 text-2xl font-bold text-gray-500">
+                There are no products
+              </p>
+            )}
           </div>
         </>
       )}

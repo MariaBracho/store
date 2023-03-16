@@ -20,7 +20,7 @@ export default function SearchProduct({
           src={searchIcon}
           width={28}
           height={24}
-          className="absolute right-2 top-1"
+          className="absolute right-2 top-1 h-auto w-auto"
         />
       </div>
     </div>
