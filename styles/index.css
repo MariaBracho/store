@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+@layer utilities {
+  .heroImage {
+    background-image: url("../assets/storeHero.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .hideScroll {
+    overflow: auto;
+    height: 100px;
+    scrollbar-width: none;
+  }
+
+  .hideScroll::-webkit-scrollbar {
+    width: 0;
+  }
+}
