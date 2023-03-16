@@ -31,7 +31,7 @@ or
 
 ## Demo
 
-Here is a working live demo :
+Here is a working live demo : https://storechic.vercel.app/
 
 ## API
 
