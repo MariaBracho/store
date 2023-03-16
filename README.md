@@ -1,5 +1,7 @@
 # store chic
 
+![hero](/public/hero.png)
+
 <table>
 <tr>
 <td>
@@ -35,7 +37,7 @@ Here is a working live demo : https://storechic.vercel.app/
 
 ## API
 
-Fake Store API : https://fakestoreapi.com/
+Fake Store API : fakestoreapi.com
 
 ## build with 🛠️
 
